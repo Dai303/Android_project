@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class Recard {
+public class Record {
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
     private String NumID;
