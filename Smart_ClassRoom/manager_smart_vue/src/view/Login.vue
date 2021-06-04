@@ -5,13 +5,13 @@
         <i class="el-icon-orange" style="margin-right:250px"></i>
         象   雨   橙
       </div>
-      <input class="input" type="text" style="margin-top:80px" placeholder="请输入用户名"/>
-      <input class="input" type="password" placeholder="请输入密码"/>
-      <router-link :to="{path: '/Home'}">
-        <div class="button">
+      <input class="input" v-model="form.id" type="text" style="margin-top:80px" placeholder="请输入用户名" />
+      <input class="input" v-model="form.password" type="password" placeholder="请输入密码" />
+      <!-- <router-link :to="{path: '/Home'}"> -->
+        <div class="button" @click="login">
           Login
         </div>
-      </router-link>
+      <!-- </router-link> -->
   </div>
 </div>
 </template>
@@ -21,7 +21,47 @@ export default {
   name: 'Login',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      id: '',
+      pass: '',
+      form: {
+        id: '',
+        password: ''
+      },
+      infor: 0
+    }
+  },
+  methods: {
+    removal () {
+      if (this.infor === 0) {
+        this.$message({
+          type: 'warning',
+          message: '没有该用户，请重新输入！'
+        })
+      }
+      if (this.infor === 1) {
+        this.$message.error('密码错误，请重新输入！')
+      }
+      if (this.infor === 2) {
+        this.$message({
+          type: 'success',
+          message: '登陆成功！'
+        })
+        this.$router.push('Home')
+      }
+      this.infor = 0
+    },
+    login () {
+      const that = this
+      // this.form.id = this.id
+      // this.form.password = this.pass
+      this.$axios
+        .post('http://localhost:8099/manager/login', this.form)
+        .then(function (response) {
+          that.infor = response.data
+          that.removal()
+          console.log('response:' + response.data)
+        })
+      // this.removal()
     }
   }
 }
@@ -79,5 +119,6 @@ export default {
   padding-top:10px;
   font-size: 23px;
   float: left;
+  cursor: pointer;
 }
 </style>

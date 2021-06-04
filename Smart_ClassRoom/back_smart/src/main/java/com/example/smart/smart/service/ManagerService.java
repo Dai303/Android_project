@@ -26,4 +26,20 @@ public class ManagerService {
     public void update(Manager manager){
         managerDao.update(manager);
     }
+    public int match(Manager manager){
+        int flag = 0;
+        List<Manager> list = managerService.findALL();
+        for(int i=0;i<list.size();i++){
+            if(manager.getId().equals(list.get(i).getId())){
+                flag = 1;//找到该用户
+                System.out.println(list.get(i).getId());
+                if(manager.getPassword().equals(list.get(i).getPassword())){
+                    flag = 2;//并且密码匹配
+                    System.out.println(list.get(i).getPassword());
+                }
+                break;
+            }
+        }
+        return flag;
+    }
 }

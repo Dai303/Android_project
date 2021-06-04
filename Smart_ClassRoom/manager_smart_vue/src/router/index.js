@@ -15,6 +15,21 @@ export default new Router({
       path: '/Home',
       name: 'Home',
       component: () => import('../view/Home.vue')
+    },
+    {
+      path: '/form',
+      name: 'form',
+      component: () => import('../view/form.vue')
+    },
+    {
+      path: '/MemberDetail',
+      name: 'MenmberDetail',
+      component: () => import('../view/MemberDetail.vue')
+    },
+    {
+      path: '/Record',
+      name: 'Record',
+      component: () => import('../view/Record.vue')
     }
   ]
 })
