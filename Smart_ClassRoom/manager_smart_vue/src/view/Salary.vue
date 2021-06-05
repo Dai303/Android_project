@@ -2,7 +2,7 @@
   <div>
     <div class="left">
     <el-aside width="100%"  style="background-color: rgb(238, 241, 246)">
-      <el-menu :default-openeds="['1', '3']" default-active="1-1">
+      <el-menu :default-openeds="['1', '3']" default-active="3">
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-user-solid"></i>
@@ -69,37 +69,19 @@
         style="width: 100%">
         <el-table-column type="index" label="编号" width="180">
         </el-table-column>
-        <el-table-column prop="id" label="ID" width="180">
+        <el-table-column prop="name" label="员工姓名" width="180">
         </el-table-column>
-        <el-table-column prop="name" label="姓名" width="180">
+        <el-table-column prop="card" label="员工卡号" width="180">
         </el-table-column>
-        <el-table-column prop="card" label="卡号">
+        <el-table-column prop="money" label="员工工资">
         </el-table-column>
-        <el-table-column prop="day" label="上班天数">
-        </el-table-column>
+        <!-- <el-table-column prop="endT" label="下班打卡时间">
+        </el-table-column> -->
         <el-table-column label="操作">
           <template slot-scope="scope">
             <router-link
-            :to="{
-                path: '/MemberDetail/' + scope.$index,
-                query: {
-                  id: tableData[scope.$index].id
-                }
-              }"
-            >
-            <!-- query: {
-                  id: this.id,
-                  operate: 0
-                } -->
-             <el-button size="mini">查看</el-button>
-            </router-link>
-            <router-link
               :to="{
-                path: '/form/',
-                query: {
-                  id: tableData[scope.$index].id,
-                  operate: 1
-                }
+                path: '/form/' + scope.$index,
               }"
             >
               <el-button type="primary" size="mini">编辑</el-button>
@@ -118,10 +100,9 @@ export default {
     return {
       tableData: [
         {
-          id: '',
           name: '',
           card: '',
-          day: ''
+          money: ''
         }
       ]
     }
@@ -131,7 +112,7 @@ export default {
     // this.form.id = this.id
     // this.form.password = this.pass
     this.$axios
-      .get('http://localhost:8099/member/findALL')
+      .get('http://localhost:8099/member/GetSalary')
       .then(function (response) {
         that.tableData = response.data
         // that.removal()
