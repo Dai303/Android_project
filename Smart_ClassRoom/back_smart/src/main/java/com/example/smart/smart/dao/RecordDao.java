@@ -46,7 +46,7 @@ public class RecordDao {
     }
     //改
     public void update(Record record){
-        String sql ="update recard set NumID =?,StartT=?,EndT =? where id =?";
-        jdbcTemplate.update(sql,record.getNumID(),record.getStartT(),record.getEndT(),record.getId());
+        String sql ="update recard set EndT =? where id =?";
+        jdbcTemplate.update(sql,record.getEndT(),record.getId());
     }
 }

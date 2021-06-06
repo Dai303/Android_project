@@ -27,21 +27,19 @@ public class RecordController {
     }
 
     @PostMapping("/add")
-    public List<Record> add(@RequestParam String name){
+    public List<Record> add(@RequestParam String name,@RequestParam LocalDateTime startT,@RequestParam LocalDateTime endT){
         Record record = new Record();
         record.setNumID(name);
-        record.setStartT(LocalDateTime.of(2021,12,12,10,11,12));
-        record.setEndT(LocalDateTime.of(2021,12,12,10,11,12));
+        record.setStartT(startT);
+        record.setEndT(endT);
         recordService.insert(record);
         return recordService.findALL();
     }
 
     @PostMapping("/update")
-    public List<Record> update(@RequestParam String name,@RequestParam Integer id){
+    public List<Record> update(@RequestParam Integer id,@RequestParam LocalDateTime endT){
         Record record = new Record();
-        record.setNumID(name);
-        record.setStartT(LocalDateTime.of(2021,12,12,10,11,12));
-        record.setEndT(LocalDateTime.of(2021,12,12,10,11,12));
+        record.setEndT(endT);
         record.setId(id);
         recordService.update(record);
         return recordService.findALL();
