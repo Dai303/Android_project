@@ -11,5 +11,10 @@ spring:
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
+  http:
+    encoding:
+      charset: UTF-8
+
 server:
   port: 8099
+

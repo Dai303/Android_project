@@ -3,6 +3,7 @@ package com.example.smart.smart.controller;
 import com.example.smart.smart.entity.Record;
 import com.example.smart.smart.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 //import java.time.LocalDateTime;
@@ -26,22 +27,22 @@ public class RecordController {
         return recordService.findALL();
     }
 
+//    @RequestMapping(value = "/add",method = RequestMethod.POST,
+//            produces = {"application/json;charset=UTF-8"})
+//    @ResponseBody
     @PostMapping("/add")
-    public List<Record> add(@RequestParam String name,@RequestParam LocalDateTime startT,@RequestParam LocalDateTime endT){
-        Record record = new Record();
-        record.setNumID(name);
-        record.setStartT(startT);
-        record.setEndT(endT);
-        recordService.insert(record);
+    public List<Record> add(@RequestBody Record body){
+        recordService.insert(body);
+//        System.out.println(body);
         return recordService.findALL();
     }
 
     @PostMapping("/update")
-    public List<Record> update(@RequestParam Integer id,@RequestParam LocalDateTime endT){
-        Record record = new Record();
-        record.setEndT(endT);
-        record.setId(id);
-        recordService.update(record);
+    public List<Record> update(@RequestBody Record body){
+//        Record record = new Record();
+//        record.setEndT(endT);
+//        record.setId(id);
+        recordService.update(body);
         return recordService.findALL();
     }
 
