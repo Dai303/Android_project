@@ -24,6 +24,14 @@ public class RecordDao {
         return jdbcTemplate.query("select * from recard;",managerMapper);
     }
 
+    //按卡号查找
+    public List<Record> findByCard(String card){
+        String sql="select * from recard where NumID =?";
+        Object[] args={card};
+        int[] argTypes={Types.VARCHAR};
+        return jdbcTemplate.query(sql,args,argTypes,managerMapper);
+    }
+
     //增加
     public void insert(Record record){
         String sql="insert into recard values(null,?,?,?)";
