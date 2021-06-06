@@ -14,16 +14,19 @@ public class RecordService {
     @Autowired
     RecordDao recordDao;
 
-    public List<Record> findALL(){
+    public List<Record> findALL() {
         return recordDao.findALL();
     }
-    public void delete(String id){
+
+    public void delete(String id) {
         recordDao.delete(id);
     }
-    public void insert(Record record){
+
+    public void insert(Record record) {
         recordDao.insert(record);
     }
-    public void update(Record record){
+
+    public void update(Record record) {
         recordDao.update(record);
     }
 }

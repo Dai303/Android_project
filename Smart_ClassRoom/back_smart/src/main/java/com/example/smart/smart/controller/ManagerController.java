@@ -3,6 +3,7 @@ package com.example.smart.smart.controller;
 import com.example.smart.smart.entity.Manager;
 import com.example.smart.smart.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,5 +41,13 @@ public class ManagerController {
         manager.setPassword(passward);
         managerService.update(manager);
         return managerService.findALL();
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST,
+            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public int login(@RequestBody Manager manager){
+//        System.out.print(manager);
+        return managerService.match(manager);
     }
 }
