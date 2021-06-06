@@ -30,6 +30,11 @@ export default new Router({
       path: '/Record',
       name: 'Record',
       component: () => import('../view/Record.vue')
+    },
+    {
+      path: '/Salary',
+      name: 'Salary',
+      component: () => import('../view/Salary.vue')
     }
   ]
 })
