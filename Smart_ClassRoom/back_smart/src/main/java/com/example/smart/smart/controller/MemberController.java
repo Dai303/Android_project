@@ -40,7 +40,7 @@ public class MemberController {
         return memberService.findALL();
     }
 
-    @GetMapping("/findOne")
+    @PostMapping("/findOne")
     public Member update(@RequestParam Integer id){
         return memberService.findOne(id);
     }

@@ -20,6 +20,9 @@
             <router-link
               :to="{
                 path: '/form',
+                query:{
+                  operate: 0
+                }
               }"
             >
               <el-menu-item index="1-2">员工录入</el-menu-item>
@@ -89,63 +92,99 @@ export default {
   name: 'Home',
   data () {
     return {
-      operate: '',
-      id: '',
+      operate: 0,
+      id: 0,
       isShow: false,
       tableData:
       {
-        id: 2,
-        Name: '',
-        Card: '',
+        Card: null,
         Day: 0,
-        Money: 0
+        id: 0,
+        Money: 0,
+        Name: ''
       },
       form: {
         name: '',
-        id: '',
+        id: null,
         day: 0
-      }
+      },
+      Boolean: false
     }
   },
   created () {
     const that = this
     // this.form.id = this.id
     // this.form.password = this.pass
-    this.operate = this.$route.params.operate
-    this.id = this.$route.params.id
-    if (this.operate === 1) {
+    this.operate = this.$route.query.operate
+    this.id = this.$route.query.id
+    this.tableData.id = this.$route.query.id
+    // eslint-disable-next-line eqeqeq
+    if (this.operate == 1) {
       this.$axios
-        .get('http://localhost:8099/member/findOne?id=' + this.id)
+        .post('http://localhost:8099/member/findOne?id=' + that.id)
         .then(function (response) {
+          console.log(response)
           that.tableData = response.data
-          that.form.name = that.tableData.Name
-          that.form.day = that.form.Day
+          console.log(that.tableData)
+          that.form = that.tableData
+          console.log(that.form)
+          // that.name = that.tableData.Name
           // that.removal()
-          console.log('response:' + response.data)
-        })
-    } else {
-      this.$axios
-        .get('http://localhost:8099/member/findALL')
-        .then(function (response) {
-          that.tableData = response.data
-          // that.removal()
-          console.log('response:' + response.data)
+          console.log('response:' + that.tableData.Name + that.form.Day)
         })
     }
   },
   methods: {
+    boolean () {
+      // eslint-disable-next-line eqeqeq
+      if (this.form.name == '' || this.tableData.Card == null) {
+        this.$message({
+          type: 'warning',
+          message: '请填完所有数据！'
+        })
+        this.Boolean = false
+      } else {
+        this.Boolean = true
+      }
+    },
     onSubmit () {
+      this.boolean()
+      console.log('123:' + this.operate)
       const that = this
       this.tableData.Name = this.form.name
       this.tableData.Money = this.form.day * 300
       this.tableData.Day = this.form.day
-      this.$axios
-        .get('http://localhost:8099/member/add?name=' + this.tableData.Name + '&card=' + this.tableData.Card + '&money=' + this.tableData.Money + '&day=' + this.tableData.Day)
-        .then(function (response) {
-          // that.tableData = response.data
-          // that.removal()
-          console.log(that.tableData)
+      // eslint-disable-next-line eqeqeq
+      if (this.operate == 1 && this.Boolean) {
+        this.$axios
+          .get('http://localhost:8099/member/update?name=' + this.tableData.Name + '&card=' + this.tableData.Card + '&money=' + this.tableData.Money + '&day=' + this.tableData.Day + '&id=' + this.tableData.id)
+          .then(function (response) {
+            // that.tableData = response.data
+            // that.removal()
+            console.log(that.tableData)
+          })
+        this.$message({
+          type: 'success',
+          message: '修改成功！'
         })
+        this.returnBack()
+      }
+      // eslint-disable-next-line eqeqeq
+      if (this.operate == 0 && this.Boolean) {
+        console.log('123')
+        this.$axios
+          .get('http://localhost:8099/member/add?name=' + this.tableData.Name + '&card=' + this.tableData.Card + '&money=' + this.tableData.Money + '&day=' + this.tableData.Day)
+          .then(function (response) {
+            // that.tableData = response.data
+            // that.removal()
+            console.log(that.tableData)
+          })
+        this.$message({
+          type: 'success',
+          message: '添加成功！'
+        })
+        this.returnBack()
+      }
     },
     returnBack () {
       this.$router.go(-1)
