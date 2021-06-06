@@ -70,7 +70,7 @@ public class MemberController {
         return card;
     }
 
-    @GetMapping("/setCard")
+    @PostMapping("/setCard")
     public void getCard(@RequestParam String Newcard){
         this.card = Newcard;
     }
