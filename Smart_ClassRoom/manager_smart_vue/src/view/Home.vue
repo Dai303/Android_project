@@ -20,6 +20,9 @@
             <router-link
               :to="{
                 path: '/form',
+                query:{
+                  operate: 0
+                }
               }"
             >
               <el-menu-item index="1-2">员工录入</el-menu-item>
@@ -81,17 +84,13 @@
           <template slot-scope="scope">
             <router-link
             :to="{
-                path: '/MemberDetail/' + scope.$index,
+                path: '/MemberDetail/',
                 query: {
                   id: tableData[scope.$index].id
                 }
               }"
             >
-            <!-- query: {
-                  id: this.id,
-                  operate: 0
-                } -->
-             <el-button size="mini">查看</el-button>
+             <el-button type="danger" size="mini">开除</el-button>
             </router-link>
             <router-link
               :to="{

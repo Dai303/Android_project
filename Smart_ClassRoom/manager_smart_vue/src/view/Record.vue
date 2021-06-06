@@ -20,17 +20,13 @@
             <router-link
               :to="{
                 path: '/form',
+                query:{
+                  operate: 0
+                }
               }"
             >
               <el-menu-item index="1-2">员工录入</el-menu-item>
             </router-link>
-            <!-- <router-link
-              :to="{
-                path: '/Home',
-              }"
-            >
-              <el-menu-item index="1-2">员工开除</el-menu-item>
-            </router-link> -->
           </el-menu-item-group>
         </el-submenu>
         <router-link
@@ -62,7 +58,7 @@
     </div>
     <div class="right">
       <div class="right_text">
-        员工表格
+        员工打卡记录
       </div>
       <el-table
         :data="tableData"
