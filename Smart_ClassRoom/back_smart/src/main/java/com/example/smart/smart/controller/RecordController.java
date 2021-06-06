@@ -5,6 +5,7 @@ import com.example.smart.smart.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+//import java.time.LocalDateTime;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -44,5 +45,16 @@ public class RecordController {
         record.setId(id);
         recordService.update(record);
         return recordService.findALL();
+    }
+
+    @PostMapping("/findByCard")
+    public List<Record> findBycard(@RequestParam String card){
+        return recordService.findByCard(card);
+    }
+
+    @PostMapping("/blooean")
+    public Integer blooeanDate(@RequestParam String card,@RequestParam LocalDateTime time){
+//        LocalDateTime time2 = LocalDateTime.now();
+        return recordService.blooeanTime(card,time);
     }
 }
