@@ -19,13 +19,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
-
+            android:textColor="@color/white"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="时间"
             />
         <EditText
+            android:textColor="@color/white"
             android:id="@+id/et_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginBottom="50dp"
+            android:ems="10"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="@color/white"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="卡号"
+            />
+        <EditText
+            android:textColor="@color/white"
+            android:id="@+id/et_cardnum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
