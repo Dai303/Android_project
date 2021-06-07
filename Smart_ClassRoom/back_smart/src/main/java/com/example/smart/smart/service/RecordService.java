@@ -1,6 +1,8 @@
 package com.example.smart.smart.service;
 
+import com.example.smart.smart.dao.MemberDao;
 import com.example.smart.smart.dao.RecordDao;
+import com.example.smart.smart.entity.Member;
 import com.example.smart.smart.entity.Record;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ public class RecordService {
     RecordService recordService;
     @Autowired
     RecordDao recordDao;
+    @Autowired
+    MemberService memberService;
 
     public List<Record> findALL() {
         return recordDao.findALL();
@@ -30,6 +34,8 @@ public class RecordService {
 
     public void update(Record record) {
         recordDao.update(record);
+        Member member = memberService.findByID(record.getNumID());
+        memberService.update(member);
     }
     public List<Record> findByCard(String card){return recordDao.findByCard(card);}
     public Integer blooeanTime(Record record){

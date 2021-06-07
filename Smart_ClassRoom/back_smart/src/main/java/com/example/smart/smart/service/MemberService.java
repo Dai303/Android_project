@@ -42,4 +42,13 @@ public class MemberService {
         }
         return member;
     }
+    public Member findByID(String card){
+        List<Member> list = memberService.findALL();
+        Member member = new Member();
+        for( int i=0;i<list.size();i++){
+            if(list.get(i).getCard().equals(card))
+                member=list.get(i);
+        }
+        return member;
+    }
 }
