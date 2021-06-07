@@ -1,7 +1,9 @@
 package com.example.smart.smart.controller;
 
 import com.example.smart.smart.entity.IDnum;
+import com.example.smart.smart.entity.Member;
 import com.example.smart.smart.entity.Record;
+import com.example.smart.smart.service.MemberService;
 import com.example.smart.smart.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,6 +19,8 @@ import java.util.List;
 public class RecordController {
     @Autowired
     RecordService recordService;
+    @Autowired
+    MemberService memberService;
 
     @GetMapping("/findALL")
     public List<Record> getdata(){
@@ -54,13 +58,29 @@ public class RecordController {
     }
 
     @PostMapping("/blooean")
-    public List<IDnum> blooeanDate(@RequestBody Record record){
+    public List<Record> blooeanDate(@RequestBody Record record){
 //        LocalDateTime time2 = LocalDateTime.now();
         System.out.println(recordService.blooeanTime(record));
-        List<IDnum> num = new ArrayList<IDnum>();
-        IDnum id = new IDnum();
+        List<Record> num = new ArrayList<Record>();
+        Record id = new Record();
         id.setId(recordService.blooeanTime(record));
-        num.add(id);
+        List<Record> all = recordService.findByCard(record.getNumID());
+        for(int i=0;i< all.size();i++) {
+            if(all.get(i).getNumID().equals(record.getNumID()))
+                id.setStartT(all.get(i).getStartT());
+        }
+        int flag=1024;
+        List<Member> members = memberService.findALL();
+        for(int i=0;i<members.size();i++){
+            if(members.get(i).getCard().equals(record.getNumID())){
+//                flag=1024;
+                num.add(id);
+                return num;
+            }
+        }
+        Record newR = new Record();
+        newR.setId(1024);
+        num.add(newR);
         return num;
     }
 }

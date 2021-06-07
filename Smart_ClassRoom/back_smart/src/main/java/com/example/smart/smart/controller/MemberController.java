@@ -30,14 +30,19 @@ public class MemberController {
 //            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 //    @ResponseBody
     @GetMapping("/add")
-    public List<Member> add(@RequestParam String name,@RequestParam String card,@RequestParam Integer money,@RequestParam Integer day){
+    public Integer add(@RequestParam String name,@RequestParam String card,@RequestParam Integer money,@RequestParam Integer day){
         Member member = new Member();
         member.setName(name);
         member.setCard(card);
         member.setMoney(money);
         member.setDay(day);
+        List<Member> list = memberService.findALL();
+        for(int i=0;i<list.size();i++){
+            if(card.equals(list.get(i).getCard()))
+                return 0;
+        }
         memberService.insert(member);
-        return memberService.findALL();
+        return 1;
     }
 
     @PostMapping("/findOne")

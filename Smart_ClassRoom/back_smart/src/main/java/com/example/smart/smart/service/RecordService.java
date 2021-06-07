@@ -33,8 +33,11 @@ public class RecordService {
     }
 
     public void update(Record record) {
+        System.out.print(record);
         recordDao.update(record);
         Member member = memberService.findByID(record.getNumID());
+        member.setDay(member.getDay()+1);
+        member.setMoney(member.getDay()*300);
         memberService.update(member);
     }
     public List<Record> findByCard(String card){return recordDao.findByCard(card);}
