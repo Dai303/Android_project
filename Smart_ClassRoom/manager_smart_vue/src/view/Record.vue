@@ -69,7 +69,7 @@
         </el-table-column>
         <el-table-column prop="numID" label="员工卡号" width="180">
         </el-table-column>
-        <el-table-column prop="startT" label="上班打开时间">
+        <el-table-column prop="startT" label="上班打卡时间">
         </el-table-column>
         <el-table-column prop="endT" label="下班打卡时间">
         </el-table-column>
@@ -105,8 +105,8 @@ export default {
         {
           id: '',
           numID: '',
-          startT: '',
-          endT: ''
+          endT: '',
+          startT: ''
         }
       ]
     }

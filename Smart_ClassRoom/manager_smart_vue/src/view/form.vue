@@ -108,7 +108,8 @@ export default {
         id: null,
         day: 0
       },
-      Boolean: false
+      Boolean: false,
+      flag: 0
     }
   },
   created () {
@@ -159,9 +160,6 @@ export default {
         this.$axios
           .get('http://localhost:8099/member/update?name=' + this.tableData.Name + '&card=' + this.tableData.Card + '&money=' + this.tableData.Money + '&day=' + this.tableData.Day + '&id=' + this.tableData.id)
           .then(function (response) {
-            // that.tableData = response.data
-            // that.removal()
-            console.log(that.tableData)
           })
         this.$message({
           type: 'success',
@@ -175,15 +173,22 @@ export default {
         this.$axios
           .get('http://localhost:8099/member/add?name=' + this.tableData.Name + '&card=' + this.tableData.Card + '&money=' + this.tableData.Money + '&day=' + this.tableData.Day)
           .then(function (response) {
-            // that.tableData = response.data
-            // that.removal()
-            console.log(that.tableData)
+            that.flag = response.data
+            console.log(that.flag)
+            // eslint-disable-next-line eqeqeq
+            if (that.flag == 1) {
+              that.$message({
+                type: 'success',
+                message: '添加成功！'
+              })
+              that.returnBack()
+            } else {
+              that.$message({
+                type: 'warning',
+                message: '该员工存在！'
+              })
+            }
           })
-        this.$message({
-          type: 'success',
-          message: '添加成功！'
-        })
-        this.returnBack()
       }
     },
     returnBack () {
