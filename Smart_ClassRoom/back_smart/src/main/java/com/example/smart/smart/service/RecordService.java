@@ -32,7 +32,9 @@ public class RecordService {
         recordDao.update(record);
     }
     public List<Record> findByCard(String card){return recordDao.findByCard(card);}
-    public Integer blooeanTime(String card, LocalDateTime time){
+    public Integer blooeanTime(Record record){
+        String card = record.getNumID();
+        LocalDateTime time = record.getStartT();
         List<Record> list = new ArrayList<Record>();
         list = recordService.findByCard(card);
         for(int i=0;i<list.size();i++){

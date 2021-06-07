@@ -52,8 +52,8 @@ public class RecordController {
     }
 
     @PostMapping("/blooean")
-    public Integer blooeanDate(@RequestParam String card,@RequestParam LocalDateTime time){
+    public Integer blooeanDate(@RequestBody Record record){
 //        LocalDateTime time2 = LocalDateTime.now();
-        return recordService.blooeanTime(card,time);
+        return recordService.blooeanTime(record);
     }
 }
