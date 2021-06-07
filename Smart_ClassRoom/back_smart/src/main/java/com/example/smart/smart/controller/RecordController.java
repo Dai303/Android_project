@@ -1,5 +1,6 @@
 package com.example.smart.smart.controller;
 
+import com.example.smart.smart.entity.IDnum;
 import com.example.smart.smart.entity.Record;
 import com.example.smart.smart.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 //import java.time.LocalDateTime;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -52,8 +54,13 @@ public class RecordController {
     }
 
     @PostMapping("/blooean")
-    public Integer blooeanDate(@RequestBody Record record){
+    public List<IDnum> blooeanDate(@RequestBody Record record){
 //        LocalDateTime time2 = LocalDateTime.now();
-        return recordService.blooeanTime(record);
+        System.out.println(recordService.blooeanTime(record));
+        List<IDnum> num = new ArrayList<IDnum>();
+        IDnum id = new IDnum();
+        id.setId(recordService.blooeanTime(record));
+        num.add(id);
+        return num;
     }
 }

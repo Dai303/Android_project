@@ -13,7 +13,7 @@ import java.util.List;
 public class MemberController {
     @Autowired
     MemberService memberService;
-    String card="123";
+    Member member1 = new Member();
 
     @GetMapping("/findALL")
     public List<Member> getdata(){
@@ -67,11 +67,11 @@ public class MemberController {
     }
     @GetMapping("/getCard")
     public String getCard(){
-        return card;
+        return member1.getCard();
     }
 
     @PostMapping("/setCard")
     public void getCard(@RequestParam String Newcard){
-        this.card = Newcard;
+        member1.setCard(Newcard);
     }
 }
